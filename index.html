@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				font-size: 18px;
+				background-image: url(https://i.loli.net/2020/09/14/v4Si8BIupOVcwm6.jpg);
+				background-attachment: fixed;
+				background-repeat: no-repeat;
+				background-size: cover;
+				height: 100vh;
+				min-height: 800px;
+			}
+
+			#MAXdiv {
+				margin: 0px auto;
+				width: 60%;
+				height: 90vh;
+				min-height: 700px;
+				background-color: white;
+				border-radius: 10px;
+			}
+
+			iframe {
+				width: 100%;
+				height: 50%;
+				margin-top: 20px;
+			}
+
+			#input_div {
+				width: 100%;
+				height: 40px;
+			}
+
+			#inurl_input {
+				margin-left: 7%;
+				width: 60%;
+				height: 30px;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+				border: none;
+			}
+
+			select {
+				width: 10%;
+				height: 30px;
+				border: none;
+			}
+
+			#play_button {
+				width: 15%;
+				height: 30px;
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+				background-color: orange;
+			}
+
+			#player-url-tips {
+				width: 90%;
+				margin: 0px auto;
+				height: 25%;
+				border-radius: 20px;
+				background-color: lightgray;
+				padding: 10px;
+				margin-top: 30px;
+				font-size: 16px;
+				font-family: 楷体;
+			}
+		</style>
+		<script type="text/javascript">
+			function changeurl() {
+				var selecttext = document.getElementById("selecturl");
+				var index = selecttext.selectedIndex; //选中索引
+				var value = selecttext.options[index].value; //选中当前选中的值
+				var play_input = document.getElementById("inurl_input");
+				var oldurl = play_input.value;
+				var newurls = value + oldurl; //拼接url
+				var play_iframe = document.getElementById("palyer-iframe");
+				play_iframe.src = newurl;
+				var play_tisp = document.getElementById("current-play-url");
+				play_tisp.innerText = newurl;
+				play_tisp.href = newurl;
+			}
+
+			function getQueryVariable(variable) {
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == variable) {
+						return pair[1];
+					}
+				}
+				return (false);
+			}
+
+			window.onload = function() {
+				var url = getQueryVariable("url"); //get  url
+				var newurl = "https://jx.parwix.com:4433/player/?url=" + url;
+				var play_iframe = document.getElementById("palyer-iframe");
+				play_iframe.src = newurl;
+				var play_tisp = document.getElementById("current-play-url");
+				play_tisp.innerText = newurl;
+				play_tisp.href = newurl;
+				var play_input = document.getElementById("inurl_input");
+				play_input.value = url;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="MAXdiv">
+			<iframe id="palyer-iframe" src="" allowtransparency="true" frameborder="0" scrolling="no"
+				allowfullscreen="true">
+			</iframe>
+
+			<div id="input_div">
+				<input type="text" value="填入URL" id="inurl_input" />
+				<select id="selecturl">
+					<option value="https://jx.parwix.com:4433/player/?url=">B站解析</option>
+					<option value="https://z1.m1907.cn/?jx=">纯净解析</option>
+					<option value="https://vip.bljiex.com/?v=">BL解析</option>
+					<option value="https://jx.618g.com/?url=">百域解析</option>
+					<option value="https://jsap.attakids.com/?url=">思古解析</option>
+				</select>
+				<button type="button" onclick="changeurl()" id="play_button">接口播放</button>
+			</div>
+
+			<div id="player-url-tips">
+				<div>该网页使用iframe（<a href="https://www.w3school.com.cn/html/html_iframe.asp" rel="noreferrer nofollow"
+						target="_blank">什么是iframe？</a>）嵌套网页播放，嵌套网页链接如下：</div>
+				<div><b>当前播放网页链接：</b><a id="current-play-url" href="" rel="noreferrer nofollow"
+						target="_blank">未传入值</a>，（如有侵权请联系该链接站长处理,感谢配合！）</div>
+				<br>
+				<div><b>注</b>：本站提供的播放接口均收集自网络，<b
+						style="color: red;">本站只提供web页面服务，并不提供影片资源存储，也不参与录制、上传。</b>本站仅用于学习交流，切勿用于商业用途，否则后果自负！</div>
+				<div><b>主流视频播放平台：</b>
+					<a href="https://www.iqiyi.com/" rel="noreferrer nofollow" target="_blank">爱奇艺</a><a>、
+					</a><a href="https://v.qq.com/" rel="noreferrer nofollow" target="_blank">腾讯视频</a><a>、
+					</a><a href="https://www.youku.com/" rel="noreferrer nofollow" target="_blank">优酷</a><a>、
+					</a><a href="https://www.mgtv.com/" rel="noreferrer nofollow" target="_blank">芒果TV</a><a>、
+					</a><a href="http://www.le.com/" rel="noreferrer nofollow" target="_blank">乐视</a><a>、
+					</a><a href="https://www.bilibili.com/" rel="noreferrer nofollow" target="_blank">bilibili</a><a>、
+					</a><a href="https://www.acfun.cn/" rel="noreferrer nofollow" target="_blank">acfun</a>等等
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
