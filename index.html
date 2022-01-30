@@ -70,19 +70,6 @@
 			}
 		</style>
 		<script type="text/javascript">
-			function changeurl() {
-				var selecttext = document.getElementById("selecturl");
-				var index = selecttext.selectedIndex; //选中索引
-				var value = selecttext.options[index].value; //选中当前选中的值
-				var play_input = document.getElementById("inurl_input");
-				var oldurl = play_input.value;
-				var newurls = value + oldurl; //拼接url
-				var play_iframe = document.getElementById("palyer-iframe");
-				play_iframe.src = newurl;
-				var play_tisp = document.getElementById("current-play-url");
-				play_tisp.innerText = newurl;
-				play_tisp.href = newurl;
-			}
 
 			function getQueryVariable(variable) {
 				var query = window.location.search.substring(1);
@@ -106,6 +93,21 @@
 				play_tisp.href = newurl;
 				var play_input = document.getElementById("inurl_input");
 				play_input.value = url;
+			}
+			
+			function changeurl() {
+				var selecttext = document.getElementById("selecturl");
+				var index = selecttext.selectedIndex; //选中索引
+				var value = selecttext.options[index].value; //选中当前选中的值
+				var play_input = document.getElementById("inurl_input");
+				var oldurl = play_input.value;
+				var newurls = value + oldurl; //拼接url
+			
+				var play_iframe = document.getElementById("palyer-iframe");
+				play_iframe.src = newurls;
+				var play_tisp = document.getElementById("current-play-url");
+				play_tisp.innerText = newurls;
+				play_tisp.href = newurls;
 			}
 		</script>
 	</head>
