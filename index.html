@@ -1,74 +1,209 @@
-<!DOCTYPE html>  
-<html lang="zh-CN">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>显示当前时间并带有花瓣掉落效果</title>  
-    <style>  
-        body {  
-            font-family: Arial, sans-serif;  
-            text-align: center;  
-            margin: 0;  
-            height: 100vh;  
-            display: flex;  
-            justify-content: center;  
-            align-items: center;  
-            background-color: #FFB6C1; /* 粉色背景 */  
-            position: relative; /* 允许子元素使用绝对定位 */  
-            overflow: hidden; /* 防止内容超出视口 */  
-        }  
-        #timeDisplay {  
-            font-size: 3em;  
-            color: #333;  
-            z-index: 1; /* 确保时间显示不被花瓣覆盖 */  
-        }  
-        .petal {  
-            position: absolute;  
-            top: -50px; /* 初始位置在视口外 */  
-            width: 30px; /* 增大花瓣宽度 */  
-            height: 90px; /* 增大花瓣高度 */  
-            background: radial-gradient(circle, pink, rgba(255, 192, 203, 0.5)); /* 使用渐变背景 */  
-            border-radius: 50% 50% 60% 60%;  
-            opacity: 0.8;  
-            animation: fall 5s infinite ease-in-out; /* 修改动画时长和缓动函数 */  
-        }  
-        @keyframes fall {  
-            0% {  
-                transform: translateX(0) translateY(0) rotate(0deg);  
-                opacity: 1;  
-            }  
-            100% {  
-                transform: translateX(calc(50vw - 50% - 15px)) translateY(100vh) rotate(720deg); /* 调整平移距离，确保花瓣不超出视口 */  
-                opacity: 0;  
-            }  
-        }  
-    </style>  
-</head>  
-<body>  
-    <div id="timeDisplay"></div>  
-  
-    <!-- 添加多个花瓣元素，使用循环或JavaScript动态生成也可以 -->  
-    <div class="petal" style="left: 10%; animation-delay: 0s;"></div>  
-    <div class="petal" style="left: 20%; animation-delay: 1s;"></div>  
-    <div class="petal" style="left: 30%; animation-delay: 2s;"></div>  
-    <div class="petal" style="left: 40%; animation-delay: 3s;"></div>  
-    <div class="petal" style="left: 50%; animation-delay: 4s;"></div>  
-    <div class="petal" style="left: 60%; animation-delay: 5s;"></div>  
-    <div class="petal" style="left: 70%; animation-delay: 6s;"></div>  
-    <div class="petal" style="left: 80%; animation-delay: 7s;"></div>  
-    <div class="petal" style="left: 90%; animation-delay: 8s;"></div>  
-  
-    <script>  
-        function updateTime() {  
-            const now = new Date();  
-            const timeString = now.toLocaleTimeString();  
-            document.getElementById('timeDisplay').textContent = timeString;  
-        }  
-  
-        // 初始调用  
-        updateTime();  
-        // 每秒更新一次  
-        setInterval(updateTime, 1000);  
-    </script>  
-</body>  
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 微信分享恶搞设置 -->
+    <meta property="og:title" content="好友代付：86元，点击链接帮我支付吧~">
+    <meta property="og:description" content="好友代付：86元，点击链接帮我支付吧~">
+    <meta property="og:image" content="https://s3.bmp.ovh/imgs/2025/08/14/3caee5c8e64d13b8.jpg">
+    <meta name="twitter:title" content="好友代付：86元，点击链接帮我支付吧~">
+    <meta name="twitter:description" content="好友代付：86元，点击链接帮我支付吧~">
+    <meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2025/08/14/3caee5c8e64d13b8.jpg">
+    <title>新年信封</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.envelope-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.envelope {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border-radius: 0 0 10px 10px;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.envelope-front {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(135deg, #c0392b 0%, #a52c1d 100%);
+    border-radius: 0 0 10px 10px;
+    z-index: 2;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #e74c3c 0%, #d64535 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 3;
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.seal {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at center, #f1c40f 0%, #d4ac0d 100%);
+    border-radius: 50%;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c0392b;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.letter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 75%;
+    background: linear-gradient(180deg, #fff 0%, #f9f9f9 100%);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s, height 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+}
+
+.letter-content {
+    font-size: 28px;
+    color: #c0392b;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out 1.5s, transform 0.5s ease-in-out 1.7s;
+}
+
+/* 打开动画类 */
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg) translateY(-100%) scaleY(0.8) rotateZ(5deg);
+    opacity: 0.5;
+}
+
+.envelope.open .seal {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+.envelope.open .letter {
+    transform: translateX(-50%) translateY(-85%) rotateZ(-2deg);
+    height: 95%;
+}
+
+.envelope.open .letter-content {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+    .envelope {
+        width: 220px;
+        height: 160px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-container">
+            <div class="envelope">
+                <div class="envelope-front"></div>
+                <div class="envelope-back"></div>
+                <div class="envelope-flap"></div>
+                <div class="seal" id="seal">Y</div>
+                <div class="letter" id="letter">
+                    <div class="letter-content">永远幸福</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const seal = document.getElementById('seal');
+            const envelope = seal.closest('.envelope');
+
+            // 添加点击事件监听器
+            seal.addEventListener('click', function() {
+                // 添加打开类，触发动画
+                envelope.classList.add('open');
+
+                // 防止重复点击
+                seal.removeEventListener('click', arguments.callee);
+            });
+
+            // 也可以允许点击整个信封打开
+            envelope.addEventListener('click', function(e) {
+                // 如果不是点击封签，则不触发（避免重复触发）
+                if (e.target !== seal) {
+                    envelope.classList.add('open');
+                    envelope.removeEventListener('click', arguments.callee);
+                }
+            });
+        });
+    </script>
+</body>
 </html>
